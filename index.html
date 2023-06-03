@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validador de Formulário</title>
+    <style>
+        @font-face {
+            font-family: '04b';
+            src: url(04B_30__.TTF) format('truetype');
+        }
+
+        body {
+            background-color: black;
+            text-align: center;
+        }
+
+        .error {
+            color: red;
+        }
+
+        h1 {
+            font-size: 50px;
+            color: #00BFFF;
+            text-align: center;
+            font-family: '04b';
+        }
+
+        label {
+            color: white;
+        }
+
+        input[type="text"],
+        input[type="email"] {
+            text-align: center;
+            margin: 0 auto;
+            color: black; 
+        }
+
+        input[type="submit"] {
+            font-family: '04b';
+        }
+    </style>
+</head>
+<body>
+    <h1>Validador de Formulário</h1>
+
+    <form id="myForm" onsubmit="submitForm(event)">
+        <label for="name">Nome:</label>
+        <br>
+        <input type="text" id="name" required>
+        <br>
+        <span id="nameError" class="error"></span>
+        <br><br>
+
+        <label for="email">Email:</label>
+        <br>
+        <input type="email" id="email" required>
+        <br>
+        <span id="emailError" class="error"></span>
+        <br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+
+    <script>
+        function validateForm() {
+            var name = document.getElementById("name").value;
+            var email = document.getElementById("email").value;
+            var isValid = true;
+
+            if (name === "") {
+                document.getElementById("nameError").innerHTML = "Por favor, preencha o nome.";
+                isValid = false;
+            } else {
+                document.getElementById("nameError").innerHTML = "";
+            }
+
+            if (email === "") {
+                document.getElementById("emailError").innerHTML = "Por favor, preencha o email.";
+                isValid = false;
+            } else {
+                document.getElementById("emailError").innerHTML = "";
+            }
+            if (isValid) {
+                
+                var formData = {
+                    name: name,
+                    email: email
+                };
+                localStorage.setItem("formData", JSON.stringify(formData));
+            }
+
+            return isValid;
+        }
+    </script>
+    <script src="dados.js"></script>
+
+</body>
+</html>
